@@ -1,11 +1,15 @@
-<!-- Inside MainAdmin/AdminManagement/index.html -->
+<!-- Example: /MainAdmin/AdminManagement/index.html -->
 <script type="module">
+    // Import the specific function for this page
     import { createAdmin } from './logic.js';
 
-    document.getElementById('create-admin-btn').addEventListener('click', async () => {
-        const name = document.getElementById('admin-name-input').value;
-        // ... get other fields
-        await createAdmin(name, email, password);
+    // Set up your UI event listeners
+    document.getElementById('myButton').addEventListener('click', async () => {
+        const name = document.getElementById('nameInput').value;
+        const email = document.getElementById('emailInput').value;
+        const password = document.getElementById('passInput').value;
+        
+        await createAdmin(name, email, password); // Calling the logic
         alert("Admin created successfully!");
     });
 </script>
