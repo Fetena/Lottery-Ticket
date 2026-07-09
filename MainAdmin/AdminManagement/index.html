@@ -1,0 +1,11 @@
+<!-- Inside MainAdmin/AdminManagement/index.html -->
+<script type="module">
+    import { createAdmin } from './logic.js';
+
+    document.getElementById('create-admin-btn').addEventListener('click', async () => {
+        const name = document.getElementById('admin-name-input').value;
+        // ... get other fields
+        await createAdmin(name, email, password);
+        alert("Admin created successfully!");
+    });
+</script>
