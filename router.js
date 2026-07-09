@@ -1,18 +1,19 @@
 // /router.js
 const routes = {
-    '/dashboard': 'BranchAdmin/Dashboard/index.html',
-    '/tickets': 'BranchAdmin/Tickets/index.html',
-    // Add all your paths here
+    '/BranchAdmin': 'BranchAdmin/index.html',
+    '/Customer': 'Customer/index.html',
+    '/MainAdmin': 'MainAdmin/index.html',
+    '/Public': 'Public/index.html'
 };
 
 async function router() {
-    const path = window.location.hash.slice(1) || '/dashboard';
-    const componentPath = routes[path];
+    // Determine the parent category (e.g., 'MainAdmin')
+    const path = window.location.hash.slice(1); // '/MainAdmin/Dashboard'
+    const parentCategory = path.split('/')[1]; // 'MainAdmin'
+    
+    const componentPath = routes['/' + parentCategory];
     
     const response = await fetch(componentPath);
     const html = await response.text();
     document.getElementById('app-view').innerHTML = html;
 }
-
-window.addEventListener('hashchange', router);
-router();
