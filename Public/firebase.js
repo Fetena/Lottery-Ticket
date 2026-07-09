@@ -5,12 +5,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth
 
 // Your Firebase configuration object
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyB4n91truFwn4dDJ56OUa1r8Y4LPbWD1V0",
+  authDomain: "lottery-ticket-26691.firebaseapp.com",
+  projectId: "lottery-ticket-26691",
+  storageBucket: "lottery-ticket-26691.firebasestorage.app",
+  messagingSenderId: "186069646271",
+  appId: "1:186069646271:web:30717f47fe9d3c351cff0a"
 };
 
 // Initialize Firebase
