@@ -1,22 +1,18 @@
-<!-- Category Container -->
-<div id="category-content">Loading...</div>
+<!-- /BranchAdmin/index.html (and others) -->
+<div id="category-content"></div>
 
 <script type="module">
-    window.addEventListener('moduleLoaded', async (e) => {
-        const pathParts = e.detail.split('/'); // e.g., #/MainAdmin/Dashboard
-        const subModule = pathParts[2]; // 'Dashboard'
+    import * as Logic from './logic.js';
 
-        if (subModule) {
-            try {
-                // Dynamically import the specific logic.js for the sub-module
-                const module = await import(`./${subModule}/logic.js`);
-                if (typeof module.init === 'function') {
-                    module.init();
-                }
-            } catch (err) {
-                document.getElementById('category-content').innerHTML = 
-                    `<p>Component ${subModule} not found.</p>`;
-            }
+    window.addEventListener('loadSubModule', (e) => {
+        const subModule = e.detail; // e.g., 'Dashboard'
+        const container = document.getElementById('category-content');
+
+        // Dynamically call the function in logic.js that matches the sub-module name
+        if (typeof Logic[subModule] === 'function') {
+            container.innerHTML = Logic[subModule]();
+        } else {
+            container.innerHTML = `<p>Module ${subModule} not found.</p>`;
         }
     });
 </script>
