@@ -1,7 +1,6 @@
 import { db } from '../../firebase.js';
-import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-export async function getPendingPayments(adminId) {
-    const q = query(collection(db, "payments"), where("adminId", "==", adminId), where("status", "==", "Pending"));
-    return await getDocs(q);
+export async function verifyPayment(paymentId, status) {
+    await updateDoc(doc(db, "payments", paymentId), { status: status }); //[cite: 3]
 }
