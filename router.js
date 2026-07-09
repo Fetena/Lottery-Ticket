@@ -7,13 +7,20 @@ const routes = {
 };
 
 async function router() {
-    // Determine the parent category (e.g., 'MainAdmin')
-    const path = window.location.hash.slice(1); // '/MainAdmin/Dashboard'
-    const parentCategory = path.split('/')[1]; // 'MainAdmin'
-    
+    const hash = window.location.hash.slice(1) || '/Public'; // Default to Public
+    const parentCategory = hash.split('/')[1]; 
     const componentPath = routes['/' + parentCategory];
-    
-    const response = await fetch(componentPath);
-    const html = await response.text();
-    document.getElementById('app-view').innerHTML = html;
+
+    if (componentPath) {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById('app-view').innerHTML = html;
+        
+        // Trigger the logic loading once the HTML is injected
+        const event = new CustomEvent('moduleLoaded', { detail: hash });
+        window.dispatchEvent(event);
+    }
 }
+
+window.addEventListener('hashchange', router);
+router();
