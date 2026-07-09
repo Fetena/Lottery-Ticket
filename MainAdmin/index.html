@@ -1,0 +1,26 @@
+<!-- Category Container: Loads sub-module logic dynamically -->
+<div id="category-content">
+    <!-- UI elements common to this category could go here -->
+</div>
+
+<script type="module">
+    // Extract the sub-module name from the URL (e.g., #/MainAdmin/Dashboard)
+    const pathParts = window.location.hash.split('/');
+    const subModule = pathParts[2]; // 'Dashboard'
+
+    async function loadModule() {
+        try {
+            // Dynamically import the logic.js from the specific sub-folder
+            const module = await import(`./${subModule}/logic.js`);
+            
+            // Execute the module's initialization function
+            if (typeof module.init === 'function') {
+                module.init();
+            }
+        } catch (err) {
+            console.error(`Could not load logic for ${subModule}:`, err);
+            document.getElementById('category-content').innerHTML = "<p>Component unavailable.</p>";
+        }
+    }
+    loadModule();
+</script>
